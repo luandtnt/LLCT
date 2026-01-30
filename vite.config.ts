@@ -51,6 +51,7 @@
         '@': path.resolve(__dirname, './src'),
       },
     },
+    publicDir: 'public',
     build: {
       target: 'esnext',
       outDir: 'build',
