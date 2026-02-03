@@ -1,6 +1,5 @@
 import React from 'react';
 import { ContentFormData } from '../../../../types/content';
-import { LanguageCombobox } from '../../../common/LanguageCombobox';
 
 interface CommonFieldsSectionProps {
   formData: Partial<ContentFormData>;
@@ -155,20 +154,6 @@ export function CommonFieldsSection({ formData, onFormDataChange, errors }: Comm
             value={currentDate}
             disabled
             className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] bg-[#f9fafb] text-[#6b7280] cursor-not-allowed"
-          />
-        </div>
-
-        {/* Ngôn ngữ */}
-        <div>
-          <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
-            Ngôn ngữ
-          </label>
-          <LanguageCombobox
-            value={formData.common?.language || 'Tiếng Việt'}
-            onChange={(value) => onFormDataChange({
-              ...formData,
-              common: { ...formData.common, language: value } as any,
-            })}
           />
         </div>
       </div>

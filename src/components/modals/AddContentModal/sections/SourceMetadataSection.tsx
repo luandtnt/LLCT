@@ -38,39 +38,31 @@ export function SourceMetadataSection({ contentType, formData, onFormDataChange,
           <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
             Nguồn <span className="text-[#b9000e]">*</span>
           </label>
-          <div className="flex gap-[16px]">
-            <label className="flex items-center gap-[8px] cursor-pointer">
-              <input
-                type="radio"
-                name="sourceType"
-                value="INTERNAL"
-                checked={sourceMetadata.sourceType === 'INTERNAL'}
-                onChange={(e) => updateSourceMetadata({ 
+          <select
+            value={sourceMetadata.sourceType || ''}
+            onChange={(e) => {
+              const newSourceType = e.target.value as 'INTERNAL' | 'ONLINE';
+              if (newSourceType === 'INTERNAL') {
+                updateSourceMetadata({ 
                   sourceType: 'INTERNAL',
                   url: undefined,
                   accessedAt: undefined
-                })}
-                className="w-[16px] h-[16px]"
-              />
-              <span className="text-[14px] text-[#111827]">Nội bộ</span>
-            </label>
-            <label className="flex items-center gap-[8px] cursor-pointer">
-              <input
-                type="radio"
-                name="sourceType"
-                value="ONLINE"
-                checked={sourceMetadata.sourceType === 'ONLINE'}
-                onChange={(e) => updateSourceMetadata({ 
+                });
+              } else {
+                updateSourceMetadata({ 
                   sourceType: 'ONLINE',
                   accessedAt: new Date().toLocaleDateString('vi-VN'),
                   internalCode: undefined,
                   providerOrg: undefined
-                })}
-                className="w-[16px] h-[16px]"
-              />
-              <span className="text-[14px] text-[#111827]">Trực tuyến</span>
-            </label>
-          </div>
+                });
+              }
+            }}
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#b9000e] focus:border-transparent"
+          >
+            <option value="">Chọn nguồn</option>
+            <option value="INTERNAL">Nội bộ</option>
+            <option value="ONLINE">Trực tuyến</option>
+          </select>
           {errors.sourceType && (
             <p className="text-[12px] text-[#b91c1c] mt-[4px]">{errors.sourceType}</p>
           )}
@@ -150,7 +142,7 @@ export function SourceMetadataSection({ contentType, formData, onFormDataChange,
           <div className="space-y-[16px]">
             <div>
               <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
-                Bản quyền
+                Loại bản quyền
               </label>
               <select
                 value={sourceMetadata.rights || ''}

@@ -64,6 +64,12 @@ export interface SachFields {
   translator?: string;
   originalLanguage?: string;
   translatedLanguage?: string;
+  translatedLanguages?: string[];
+  chiefEditor?: string;
+  compositionYear?: string;
+  reprintEdition?: string;
+  editor?: string;
+  editorialDepartment?: string;
 }
 
 export interface AudioFields {
@@ -72,6 +78,9 @@ export interface AudioFields {
   programName?: string;
   episodeNumber?: string;
   language?: string;
+  presenter?: string;
+  quality?: string;
+  bandwidth?: string;
 }
 
 export interface VideoFields {
@@ -81,13 +90,18 @@ export interface VideoFields {
   eventName?: string;
   location?: string;
   language?: string;
+  director?: string;
+  productionCompany?: string;
+  videoFormat?: string;
+  screenplay?: string;
 }
 
 export interface HinhAnhFields {
-  creationDate: string;
-  imageType: string;
+  photographer?: string;
+  captureDate?: string;
+  location?: string;
+  imageType?: string;
   caption?: string;
-  altText?: string;
   collection?: string;
 }
 
