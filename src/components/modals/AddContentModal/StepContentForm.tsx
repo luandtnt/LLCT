@@ -205,12 +205,6 @@ export function StepContentForm({
           <h3 className="text-[17px] font-semibold text-[#111827]">
             Thêm mới – {contentTypeLabels[contentType]}
           </h3>
-          <button
-            onClick={onBack}
-            className="text-[14px] text-[#b9000e] hover:underline"
-          >
-            Đổi loại
-          </button>
         </div>
       </div>
 
@@ -286,6 +280,12 @@ export function StepContentForm({
 
       {/* Footer Actions */}
       <div className="border-t border-[#e5e7eb] p-[20px] flex justify-end gap-[10px] flex-shrink-0">
+        <Button
+          onClick={onBack}
+          label="Đổi loại"
+          variant="outline"
+          size="md"
+        />
         <Button
           onClick={handleSaveDraft}
           label="Lưu nháp"

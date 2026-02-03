@@ -1,5 +1,6 @@
+import React from 'react';
 import { ContentFormData } from '../../../../types/content';
-import { X } from 'lucide-react';
+import { LanguageCombobox } from '../../../common/LanguageCombobox';
 
 interface CommonFieldsSectionProps {
   formData: Partial<ContentFormData>;
@@ -9,6 +10,11 @@ interface CommonFieldsSectionProps {
 
 export function CommonFieldsSection({ formData, onFormDataChange, errors }: CommonFieldsSectionProps) {
   const [authorInput, setAuthorInput] = React.useState('');
+  
+  // Mock data for user and organization
+  const currentUser = 'Nguyễn Văn A';
+  const currentOrganization = 'Ban Tuyên giáo Tỉnh ủy';
+  const currentDate = new Date().toLocaleDateString('vi-VN');
 
   const handleAddAuthor = () => {
     if (authorInput.trim()) {
@@ -48,7 +54,7 @@ export function CommonFieldsSection({ formData, onFormDataChange, errors }: Comm
               ...formData,
               common: { ...formData.common, code: e.target.value } as any,
             })}
-            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#b9000e] focus:border-transparent"
             placeholder="VB-20250130-0001"
           />
           {errors.code && (
@@ -68,7 +74,7 @@ export function CommonFieldsSection({ formData, onFormDataChange, errors }: Comm
               ...formData,
               common: { ...formData.common, title: e.target.value } as any,
             })}
-            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#b9000e] focus:border-transparent"
             placeholder="Nhập tên nội dung"
           />
           {errors.title && (
@@ -87,7 +93,7 @@ export function CommonFieldsSection({ formData, onFormDataChange, errors }: Comm
               ...formData,
               common: { ...formData.common, classification: e.target.value } as any,
             })}
-            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#b9000e] focus:border-transparent"
           >
             <option value="">Chọn độ mật</option>
             <option value="CONG_KHAI">Công khai</option>
@@ -100,48 +106,56 @@ export function CommonFieldsSection({ formData, onFormDataChange, errors }: Comm
           )}
         </div>
 
-        {/* Tác giả */}
+        {/* Trạng thái - Disabled, default "Nháp" */}
         <div>
           <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
-            Tác giả <span className="text-[#b9000e]">*</span>
+            Trạng thái
           </label>
-          <div className="flex gap-[8px] mb-[8px]">
-            <input
-              type="text"
-              value={authorInput}
-              onChange={(e) => setAuthorInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleAddAuthor()}
-              className="flex-1 px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
-              placeholder="Nhập tên tác giả hoặc cơ quan"
-            />
-            <button
-              onClick={handleAddAuthor}
-              className="px-[16px] py-[8px] bg-[#b9000e] text-white rounded-[4px] text-[14px] hover:bg-[#9a0000]"
-            >
-              Thêm
-            </button>
-          </div>
-          {formData.common?.authors && formData.common.authors.length > 0 && (
-            <div className="flex flex-wrap gap-[8px]">
-              {formData.common.authors.map((author, index) => (
-                <div
-                  key={index}
-                  className="inline-flex items-center gap-[6px] px-[10px] py-[4px] bg-[#f3f4f6] rounded-[4px]"
-                >
-                  <span className="text-[14px] text-[#111827]">{author}</span>
-                  <button
-                    onClick={() => handleRemoveAuthor(index)}
-                    className="text-[#6b7280] hover:text-[#b91c1c]"
-                  >
-                    <X size={14} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-          {errors.authors && (
-            <p className="text-[12px] text-[#b91c1c] mt-[4px]">{errors.authors}</p>
-          )}
+          <input
+            type="text"
+            value="Nháp"
+            disabled
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] bg-[#f9fafb] text-[#6b7280] cursor-not-allowed"
+          />
+        </div>
+
+        {/* Đơn vị người tải lên - Disabled, auto-filled */}
+        <div>
+          <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
+            Đơn vị người tải lên
+          </label>
+          <input
+            type="text"
+            value={currentOrganization}
+            disabled
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] bg-[#f9fafb] text-[#6b7280] cursor-not-allowed"
+          />
+        </div>
+
+        {/* Người tải lên - Disabled, auto-filled */}
+        <div>
+          <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
+            Người tải lên
+          </label>
+          <input
+            type="text"
+            value={currentUser}
+            disabled
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] bg-[#f9fafb] text-[#6b7280] cursor-not-allowed"
+          />
+        </div>
+
+        {/* Ngày tải lên - Disabled, current date */}
+        <div>
+          <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
+            Ngày tải lên
+          </label>
+          <input
+            type="text"
+            value={currentDate}
+            disabled
+            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] bg-[#f9fafb] text-[#6b7280] cursor-not-allowed"
+          />
         </div>
 
         {/* Ngôn ngữ */}
@@ -149,20 +163,15 @@ export function CommonFieldsSection({ formData, onFormDataChange, errors }: Comm
           <label className="block text-[14px] font-medium text-[#111827] mb-[6px]">
             Ngôn ngữ
           </label>
-          <input
-            type="text"
+          <LanguageCombobox
             value={formData.common?.language || 'Tiếng Việt'}
-            onChange={(e) => onFormDataChange({
+            onChange={(value) => onFormDataChange({
               ...formData,
-              common: { ...formData.common, language: e.target.value } as any,
+              common: { ...formData.common, language: value } as any,
             })}
-            className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
           />
         </div>
       </div>
     </div>
   );
 }
-
-// Add React import at the top
-import React from 'react';
