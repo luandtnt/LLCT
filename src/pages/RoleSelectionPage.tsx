@@ -39,11 +39,11 @@ export function RoleSelectionPage() {
                 </div>
                 <div className="text-center">
                   <h3 className="text-[24px] font-bold text-[#111827] mb-[8px]">
-                    Cấp trên
+                    Lãnh đạo
                   </h3>
                   <p className="text-[14px] text-[#6b7280] leading-relaxed">
                     Phê duyệt và quản lý tài liệu<br />
-                    từ cấp dưới
+                    từ chuyên viên
                   </p>
                 </div>
                 <div className="mt-[8px] px-[24px] py-[10px] bg-[#b9000e] text-white rounded-[8px] font-medium text-[14px] group-hover:bg-[#9a000c] transition-colors">
@@ -63,11 +63,11 @@ export function RoleSelectionPage() {
                 </div>
                 <div className="text-center">
                   <h3 className="text-[24px] font-bold text-[#111827] mb-[8px]">
-                    Cấp dưới
+                    Chuyên viên
                   </h3>
                   <p className="text-[14px] text-[#6b7280] leading-relaxed">
                     Tạo mới và nộp tài liệu<br />
-                    lên cấp trên
+                    lên lãnh đạo
                   </p>
                 </div>
                 <div className="mt-[8px] px-[24px] py-[10px] bg-[#6b7280] text-white rounded-[8px] font-medium text-[14px] group-hover:bg-[#4b5563] transition-colors">

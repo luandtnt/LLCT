@@ -43,11 +43,12 @@ export function Sidebar({ onClose }: SidebarProps) {
   const menuSections = [
     { label: 'QUẢN LÝ ĐÁNH GIÁ, NHẬN XÉT', path: '/dashboard/reviews', roles: ['supervisor', 'subordinate'] },
     { label: 'BÁO CÁO, THỐNG KÊ', path: '/dashboard/reports', roles: ['supervisor'] },
-    { label: 'TRA CỨU', path: '#', roles: ['supervisor', 'subordinate'] },
-    { label: 'SOẠN THẢO VĂN BẢN', path: '#', roles: ['supervisor', 'subordinate'] },
-    { label: 'TÓM TẮT VĂN BẢN', path: '#', roles: ['supervisor', 'subordinate'] },
-    { label: 'PHÂN TÍCH, DỰ BÁO', path: '#', roles: ['supervisor', 'subordinate'] },
-    { label: 'THEO DÕI DƯ LUẬN', path: '#', roles: ['supervisor', 'subordinate'] },
+    // Hidden modules - not yet implemented
+    // { label: 'TRA CỨU', path: '#', roles: ['supervisor', 'subordinate'] },
+    // { label: 'SOẠN THẢO VĂN BẢN', path: '#', roles: ['supervisor', 'subordinate'] },
+    // { label: 'TÓM TẮT VĂN BẢN', path: '#', roles: ['supervisor', 'subordinate'] },
+    // { label: 'PHÂN TÍCH, DỰ BÁO', path: '#', roles: ['supervisor', 'subordinate'] },
+    // { label: 'THEO DÕI DƯ LUẬN', path: '#', roles: ['supervisor', 'subordinate'] },
   ];
 
   const isActive = (path: string) => {

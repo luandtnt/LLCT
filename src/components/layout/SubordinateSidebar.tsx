@@ -40,11 +40,12 @@ export function SubordinateSidebar({ onClose }: SubordinateSidebarProps) {
   ];
 
   const menuSections = [
-    { label: 'TRA CỨU', path: '#' },
-    { label: 'SOẠN THẢO VĂN BẢN', path: '#' },
-    { label: 'TÓM TẮT VĂN BẢN', path: '#' },
-    { label: 'PHÂN TÍCH, DỰ BÁO', path: '#' },
-    { label: 'THEO DÕI DƯ LUẬN', path: '#' },
+    // Hidden modules - not yet implemented
+    // { label: 'TRA CỨU', path: '#' },
+    // { label: 'SOẠN THẢO VĂN BẢN', path: '#' },
+    // { label: 'TÓM TẮT VĂN BẢN', path: '#' },
+    // { label: 'PHÂN TÍCH, DỰ BÁO', path: '#' },
+    // { label: 'THEO DÕI DƯ LUẬN', path: '#' },
   ];
 
   const isActive = (path: string) => {
