@@ -3,7 +3,7 @@ services:
     name: party-documents-app
     env: static
     buildCommand: npm install && npm run build
-    staticPublishPath: ./build
+    staticPublishPath: ./dist
     headers:
       - path: /*
         name: Cache-Control
