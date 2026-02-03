@@ -12,16 +12,27 @@ const RoleContext = createContext<RoleContextType | undefined>(undefined);
 export function RoleProvider({ children }: { children: ReactNode }) {
   // Initialize role from localStorage
   const [role, setRoleState] = useState<UserRole>(() => {
+    console.log('🚀 RoleProvider v2.0: Initializing...');
     const savedRole = localStorage.getItem('userRole');
-    return (savedRole as UserRole) || null;
+    console.log('🔍 RoleProvider: Reading from localStorage:', savedRole);
+    // Validate that savedRole is a valid UserRole
+    if (savedRole === 'supervisor' || savedRole === 'subordinate') {
+      console.log('✅ RoleProvider: Valid role found:', savedRole);
+      return savedRole;
+    }
+    console.log('❌ RoleProvider: No valid role, returning null');
+    return null;
   });
 
   // Custom setRole that also saves to localStorage
   const setRole = (newRole: UserRole) => {
+    console.log('📝 RoleProvider: Setting role to:', newRole);
     setRoleState(newRole);
     if (newRole === null) {
+      console.log('🗑️ RoleProvider: Removing role from localStorage');
       localStorage.removeItem('userRole');
     } else {
+      console.log('💾 RoleProvider: Saving role to localStorage:', newRole);
       localStorage.setItem('userRole', newRole);
     }
   };
