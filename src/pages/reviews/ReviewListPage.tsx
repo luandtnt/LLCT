@@ -31,6 +31,7 @@ export function ReviewListPage() {
   const totalPages = Math.ceil(reviews.length / itemsPerPage);
 
   const tableColumns = [
+    { key: 'reviewCode', label: 'Mã bình luận', align: 'left' as const, minWidth: '120px' },
     { key: 'code', label: 'Mã Tài liệu', align: 'left' as const, minWidth: '120px' },
     { key: 'materialTitle', label: 'Tên Tài liệu', align: 'left' as const, minWidth: '200px' },
     { key: 'reviewer', label: 'Đơn Vị/Người đánh giá', align: 'left' as const, minWidth: '180px' },
@@ -126,76 +127,66 @@ export function ReviewListPage() {
                 />
                 
                 {/* Filter Row */}
-                <tr className="border-b border-[#e5e7eb] bg-[#fef3f2]">
-                  <td className="px-[16px] py-[8px]" colSpan={8}>
-                    <div className="text-[12px] text-[#b9000e] mb-[8px] font-medium">
-                      Chính độ cột dài loại tài liệu và ngày tải lên nhận bột, độ mật, tác giả, trạng thái dài
-                    </div>
-                  </td>
-                </tr>
                 <tr className="border-b border-[#e5e7eb]">
-                  <td className="px-[16px] py-[8px]">
-                    <div className="flex items-center justify-center">
-                      <span className="text-[12px] text-[#6b7280] font-medium">Lọc Tìm kiếm</span>
-                    </div>
+                  <td className="px-[16px] py-[12px]">
+                    {/* Empty cell for checkbox column - no filter */}
                   </td>
-                  <td className="px-[16px] py-[8px]">
+                  <td className="px-[16px] py-[12px]">
                     <input
                       type="text"
                       value={filters.code}
                       onChange={(e) => handleFilterChange('code', e.target.value)}
-                      placeholder="Nhập mã tài liệu"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      placeholder="Nhập mã bình luận"
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
-                  <td className="px-[16px] py-[8px]">
+                  <td className="px-[16px] py-[12px]">
                     <input
                       type="text"
                       value={filters.materialId}
                       onChange={(e) => handleFilterChange('materialId', e.target.value)}
-                      placeholder="Nhập tên tài liệu"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      placeholder="Nhập mã tài liệu"
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
-                  <td className="px-[16px] py-[8px]">
+                  <td className="px-[16px] py-[12px]">
+                    <input
+                      type="text"
+                      placeholder="Nhập tên tài liệu"
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                    />
+                  </td>
+                  <td className="px-[16px] py-[12px]">
                     <input
                       type="text"
                       value={filters.reviewer}
                       onChange={(e) => handleFilterChange('reviewer', e.target.value)}
                       placeholder="Nhập tên đơn vị/người đánh giá"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
-                  <td className="px-[16px] py-[8px]">
+                  <td className="px-[16px] py-[12px]">
                     <input
                       type="text"
                       value={filters.content}
                       onChange={(e) => handleFilterChange('content', e.target.value)}
                       placeholder="Nhập nội dung"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
-                  <td className="px-[16px] py-[8px]">
-                    <div className="flex gap-[4px]">
-                      <input
-                        type="date"
-                        value={filters.dateFrom}
-                        onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
-                        className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
-                      />
-                      <input
-                        type="date"
-                        value={filters.dateTo}
-                        onChange={(e) => handleFilterChange('dateTo', e.target.value)}
-                        className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
-                      />
-                    </div>
+                  <td className="px-[16px] py-[12px]">
+                    <input
+                      type="date"
+                      value={filters.dateFrom}
+                      onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                    />
                   </td>
-                  <td className="px-[16px] py-[8px]">
+                  <td className="px-[16px] py-[12px]">
                     <select
                       value={filters.rating}
                       onChange={(e) => handleFilterChange('rating', e.target.value)}
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      className="w-full px-[12px] py-[8px] border border-[#e5e7eb] rounded-[4px] text-[14px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     >
                       <option value="">Tất cả</option>
                       <option value="5">5 sao</option>
@@ -205,10 +196,10 @@ export function ReviewListPage() {
                       <option value="1">1 sao</option>
                     </select>
                   </td>
-                  <td className="px-[16px] py-[8px]">
+                  <td className="px-[16px] py-[12px]">
                     <button
                       onClick={handleClearFilters}
-                      className="text-[12px] text-[#b9000e] hover:underline whitespace-nowrap font-medium"
+                      className="text-[14px] text-[#b9000e] hover:underline whitespace-nowrap font-medium"
                     >
                       Xóa bỏ lọc
                     </button>
@@ -223,6 +214,9 @@ export function ReviewListPage() {
                         checked={selectedItems.includes(review.id)}
                         onChange={(checked) => handleSelectItem(review.id, checked)}
                       />
+                    </td>
+                    <td className="px-[16px] py-[12px] text-[14px] text-[#111827]">
+                      {review.code}
                     </td>
                     <td className="px-[16px] py-[12px] text-[14px] text-[#111827]">
                       {review.materialId}

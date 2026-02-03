@@ -23,6 +23,7 @@ import { ProtectedRoute } from "./components/layout/ProtectedRoute";
 import { RoleBasedRoute } from "./components/layout/RoleBasedRoute";
 import { ReviewListPage } from "./pages/reviews/ReviewListPage";
 import { ReviewDetailPage } from "./pages/reviews/ReviewDetailPage";
+import { ReportsPage } from "./pages/reports/ReportsPage";
 
 export const router = createBrowserRouter([
   {
@@ -125,6 +126,7 @@ export const router = createBrowserRouter([
       { path: "political-documents", Component: PoliticalDocumentsPage },
       { path: "reviews", Component: ReviewListPage },
       { path: "reviews/:id", Component: ReviewDetailPage },
+      { path: "reports", Component: ReportsPage },
     ],
   },
   {

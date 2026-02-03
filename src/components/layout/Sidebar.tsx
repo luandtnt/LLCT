@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
+import { useRole } from '../../contexts/RoleContext';
 
 interface SidebarProps {
   onClose?: () => void;
@@ -25,6 +26,7 @@ const IconArrowDown = ({ isOpen }: { isOpen: boolean }) => (
 
 export function Sidebar({ onClose }: SidebarProps) {
   const location = useLocation();
+  const { role } = useRole();
   const [isDocumentsOpen, setIsDocumentsOpen] = useState(true);
 
   const documentLinks = [
@@ -39,13 +41,13 @@ export function Sidebar({ onClose }: SidebarProps) {
   ];
 
   const menuSections = [
-    { label: 'QUẢN LÝ ĐÁNH GIÁ, NHẬN XÉT', path: '/dashboard/reviews' },
-    { label: 'BÁO CÁO, THỐNG KÊ', path: '#' },
-    { label: 'TRA CỨU', path: '#' },
-    { label: 'SOẠN THẢO VĂN BẢN', path: '#' },
-    { label: 'TÓM TẮT VĂN BẢN', path: '#' },
-    { label: 'PHÂN TÍCH, DỰ BÁO', path: '#' },
-    { label: 'THEO DÕI DƯ LUẬN', path: '#' },
+    { label: 'QUẢN LÝ ĐÁNH GIÁ, NHẬN XÉT', path: '/dashboard/reviews', roles: ['supervisor', 'subordinate'] },
+    { label: 'BÁO CÁO, THỐNG KÊ', path: '/dashboard/reports', roles: ['supervisor'] },
+    { label: 'TRA CỨU', path: '#', roles: ['supervisor', 'subordinate'] },
+    { label: 'SOẠN THẢO VĂN BẢN', path: '#', roles: ['supervisor', 'subordinate'] },
+    { label: 'TÓM TẮT VĂN BẢN', path: '#', roles: ['supervisor', 'subordinate'] },
+    { label: 'PHÂN TÍCH, DỰ BÁO', path: '#', roles: ['supervisor', 'subordinate'] },
+    { label: 'THEO DÕI DƯ LUẬN', path: '#', roles: ['supervisor', 'subordinate'] },
   ];
 
   const isActive = (path: string) => {
@@ -103,7 +105,9 @@ export function Sidebar({ onClose }: SidebarProps) {
           )}
 
           {/* Other Menu Sections */}
-          {menuSections.map((section, index) => (
+          {menuSections
+            .filter(section => !role || section.roles.includes(role))
+            .map((section, index) => (
             <div key={index} className="relative shrink-0 w-full">
               <div className="content-stretch flex flex-col items-start px-[10px] relative w-full">
                 {section.path === '#' ? (
