@@ -33,7 +33,7 @@ export function StepSelectType({ selectedType, onSelectType, onCancel, onNext }:
             {/* Title and instruction */}
             <div className="text-center mb-[32px]">
               <h3 className="text-[18px] font-semibold text-[#111827] mb-[8px]">
-                Chọn loại nội dung bạn muốn thêm mới
+                Chọn loại tài liệu
               </h3>
               <p className="text-[14px] text-[#6b7280]">
                 Vui lòng chọn 01 loại để tiếp tục.

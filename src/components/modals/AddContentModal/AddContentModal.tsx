@@ -168,7 +168,7 @@ export function AddContentModal({ isOpen, onClose, onSuccess }: AddContentModalP
           {/* Header */}
           <div className="bg-[#b9000e] text-white px-[24px] py-[18px] flex items-center justify-between rounded-t-[8px] flex-shrink-0">
             <div>
-              <h2 className="text-[20px] font-semibold">Thêm mới nội dung</h2>
+              <h2 className="text-[20px] font-semibold">Thêm mới tài liệu</h2>
               <p className="text-[14px] opacity-90 mt-[4px]">Bước {step}/2</p>
             </div>
             <button

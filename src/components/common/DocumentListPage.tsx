@@ -6,6 +6,8 @@ import { StatusBadge } from './StatusBadge';
 import { TableFooter } from './TableFooter';
 import { CustomCheckbox } from './CustomCheckbox';
 import { Button } from './Button';
+import { RejectButton } from './RejectButton';
+import { ApproveButton } from './ApproveButton';
 import { DeleteIcon } from '../icons/DeleteIcon';
 import { AddIcon } from '../icons/AddIcon';
 import { TableHeader } from './TableHeader';
@@ -83,18 +85,18 @@ export function DocumentListPage({ pageTitle, role, initialDocuments }: Document
   const tableColumns = [
     { key: 'code', label: 'Mã Tài Liệu', align: 'left' as const, minWidth: '120px' },
     { key: 'title', label: 'Tên Tài Liệu', align: 'left' as const, minWidth: '250px' },
-    { key: 'type', label: 'Loại Tài Liệu', align: 'left' as const, minWidth: '120px' },
-    { key: 'classification', label: 'Độ Mật', align: 'left' as const, minWidth: '100px' },
-    { key: 'author', label: 'Tác Giả', align: 'left' as const, minWidth: '120px' },
-    { key: role === 'supervisor' ? 'uploadDate' : 'createdDate', label: role === 'supervisor' ? 'Ngày Tải Lên' : 'Ngày Tạo Lần', align: 'left' as const, minWidth: '110px' },
-    { key: 'status', label: 'Trạng Thái', align: role === 'supervisor' ? 'center' as const : 'left' as const, minWidth: '150px' },
+    { key: 'type', label: 'Loại Tài Liệu', align: 'left' as const, minWidth: '100px' },
+    { key: 'classification', label: 'Độ Mật', align: 'left' as const, minWidth: '130px' },
+    { key: 'author', label: 'Tác Giả', align: 'left' as const, minWidth: '200px' },
+    { key: role === 'supervisor' ? 'uploadDate' : 'createdDate', label: role === 'supervisor' ? 'Ngày Tải Lên' : 'Ngày Tạo Lần', align: 'left' as const, minWidth: '80px' },
+    { key: 'status', label: 'Trạng Thái', align: role === 'supervisor' ? 'center' as const : 'left' as const, minWidth: '160px' },
     { key: 'actions', label: 'Thao tác', align: role === 'supervisor' ? 'center' as const : 'left' as const, minWidth: '120px' }
   ];
 
   const filterColumns = [
     { key: 'code', type: 'text' as const, placeholder: 'Nhập mã tài liệu' },
     { key: 'title', type: 'text' as const, placeholder: 'Nhập tên tài liệu' },
-    { key: 'type', type: 'date' as const, placeholder: 'Ngày lập BC' },
+    { key: 'type', type: 'text' as const, placeholder: 'Loại tài liệu' },
     { 
       key: 'classification', 
       type: 'select' as const, 
@@ -317,18 +319,20 @@ export function DocumentListPage({ pageTitle, role, initialDocuments }: Document
     <div className="bg-[#f5f5f5] flex-1 overflow-auto">
       <div className="p-[16px]">
         {/* Page Title and Action Buttons */}
-        <div className="bg-white rounded-[8px] p-[16px] mb-[16px] flex items-center justify-between gap-[10px] flex-wrap border border-[#e5e7eb]">
+        <div className="bg-white rounded-[8px] p-[16px] mb-[16px] flex items-center justify-between gap-[10px] border border-[#e5e7eb]">
           <h1 className="text-[18px] font-semibold text-[#111827]">
             {pageTitle}
           </h1>
-          <div className="flex gap-[10px] flex-wrap">
-            <Button
-              onClick={handleDeleteSelected}
-              icon={<DeleteIcon />}
-              label="Xóa"
-              variant="outline"
-              size="md"
-            />
+          <div className="flex gap-[10px]">
+            {role === 'subordinate' && (
+              <Button
+                onClick={handleDeleteSelected}
+                icon={<DeleteIcon />}
+                label="Xóa"
+                variant="outline"
+                size="md"
+              />
+            )}
             {role === 'subordinate' ? (
               <Button
                 onClick={handleSubmitToSuperior}
@@ -339,18 +343,8 @@ export function DocumentListPage({ pageTitle, role, initialDocuments }: Document
               />
             ) : (
               <>
-                <Button
-                  onClick={handleReject}
-                  label="Từ chối"
-                  variant="outline"
-                  size="md"
-                />
-                <Button
-                  onClick={handleApprove}
-                  label="Phê duyệt"
-                  variant="outline"
-                  size="md"
-                />
+                <RejectButton onClick={handleReject} />
+                <ApproveButton onClick={handleApprove} />
               </>
             )}
             <Button
@@ -360,13 +354,15 @@ export function DocumentListPage({ pageTitle, role, initialDocuments }: Document
               variant="outline"
               size="md"
             />
-            <Button
-              onClick={() => setIsAddContentModalOpen(true)}
-              icon={<AddIcon />}
-              label="Thêm mới"
-              variant="primary"
-              size="md"
-            />
+            {role === 'subordinate' && (
+              <Button
+                onClick={() => setIsAddContentModalOpen(true)}
+                icon={<AddIcon />}
+                label="Thêm mới"
+                variant="primary"
+                size="md"
+              />
+            )}
           </div>
         </div>
 

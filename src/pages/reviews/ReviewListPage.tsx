@@ -22,19 +22,21 @@ export function ReviewListPage() {
     code: '',
     reviewer: '',
     content: '',
-    materialTitle: '',
+    materialId: '',
+    dateFrom: '',
+    dateTo: '',
     rating: '',
-    actions: '',
   });
 
   const totalPages = Math.ceil(reviews.length / itemsPerPage);
 
   const tableColumns = [
-    { key: 'code', label: 'Mã đánh luận', align: 'left' as const, minWidth: '120px' },
-    { key: 'reviewer', label: 'Người bình luận', align: 'left' as const, minWidth: '150px' },
-    { key: 'content', label: 'Nội dung bình luận', align: 'left' as const, minWidth: '350px' },
-    { key: 'materialCode', label: 'Mã tài liệu', align: 'left' as const, minWidth: '150px' },
-    { key: 'rating', label: 'Điểm đánh giá', align: 'center' as const, minWidth: '140px' },
+    { key: 'code', label: 'Mã Tài liệu', align: 'left' as const, minWidth: '120px' },
+    { key: 'materialTitle', label: 'Tên Tài liệu', align: 'left' as const, minWidth: '200px' },
+    { key: 'reviewer', label: 'Đơn Vị/Người đánh giá', align: 'left' as const, minWidth: '180px' },
+    { key: 'content', label: 'Nội dung', align: 'left' as const, minWidth: '250px' },
+    { key: 'date', label: 'Ngày Tạo đánh giá', align: 'center' as const, minWidth: '140px' },
+    { key: 'rating', label: 'Đánh giá', align: 'center' as const, minWidth: '120px' },
     { key: 'actions', label: 'Thao tác', align: 'center' as const, minWidth: '100px' },
   ];
 
@@ -94,9 +96,10 @@ export function ReviewListPage() {
       code: '',
       reviewer: '',
       content: '',
-      materialTitle: '',
+      materialId: '',
+      dateFrom: '',
+      dateTo: '',
       rating: '',
-      actions: '',
     });
   };
 
@@ -123,10 +126,17 @@ export function ReviewListPage() {
                 />
                 
                 {/* Filter Row */}
+                <tr className="border-b border-[#e5e7eb] bg-[#fef3f2]">
+                  <td className="px-[16px] py-[8px]" colSpan={8}>
+                    <div className="text-[12px] text-[#b9000e] mb-[8px] font-medium">
+                      Chính độ cột dài loại tài liệu và ngày tải lên nhận bột, độ mật, tác giả, trạng thái dài
+                    </div>
+                  </td>
+                </tr>
                 <tr className="border-b border-[#e5e7eb]">
                   <td className="px-[16px] py-[8px]">
                     <div className="flex items-center justify-center">
-                      <span className="text-[12px] text-[#6b7280]">Lọc tìm kiếm</span>
+                      <span className="text-[12px] text-[#6b7280] font-medium">Lọc Tìm kiếm</span>
                     </div>
                   </td>
                   <td className="px-[16px] py-[8px]">
@@ -134,8 +144,17 @@ export function ReviewListPage() {
                       type="text"
                       value={filters.code}
                       onChange={(e) => handleFilterChange('code', e.target.value)}
-                      placeholder="Mã đánh luận"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+                      placeholder="Nhập mã tài liệu"
+                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                    />
+                  </td>
+                  <td className="px-[16px] py-[8px]">
+                    <input
+                      type="text"
+                      value={filters.materialId}
+                      onChange={(e) => handleFilterChange('materialId', e.target.value)}
+                      placeholder="Nhập tên tài liệu"
+                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
                   <td className="px-[16px] py-[8px]">
@@ -143,8 +162,8 @@ export function ReviewListPage() {
                       type="text"
                       value={filters.reviewer}
                       onChange={(e) => handleFilterChange('reviewer', e.target.value)}
-                      placeholder="Người bình luận"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+                      placeholder="Nhập tên đơn vị/người đánh giá"
+                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
                   <td className="px-[16px] py-[8px]">
@@ -152,24 +171,31 @@ export function ReviewListPage() {
                       type="text"
                       value={filters.content}
                       onChange={(e) => handleFilterChange('content', e.target.value)}
-                      placeholder="Nội dung bình luận"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+                      placeholder="Nhập nội dung"
+                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     />
                   </td>
                   <td className="px-[16px] py-[8px]">
-                    <input
-                      type="text"
-                      value={filters.materialTitle}
-                      onChange={(e) => handleFilterChange('materialTitle', e.target.value)}
-                      placeholder="Nhập mã tài liệu"
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
-                    />
+                    <div className="flex gap-[4px]">
+                      <input
+                        type="date"
+                        value={filters.dateFrom}
+                        onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
+                        className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      />
+                      <input
+                        type="date"
+                        value={filters.dateTo}
+                        onChange={(e) => handleFilterChange('dateTo', e.target.value)}
+                        className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
+                      />
+                    </div>
                   </td>
                   <td className="px-[16px] py-[8px]">
                     <select
                       value={filters.rating}
                       onChange={(e) => handleFilterChange('rating', e.target.value)}
-                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[14px]"
+                      className="w-full px-[8px] py-[6px] border border-[#e5e7eb] rounded-[4px] text-[12px] focus:outline-none focus:ring-1 focus:ring-[#b9000e]"
                     >
                       <option value="">Tất cả</option>
                       <option value="5">5 sao</option>
@@ -182,7 +208,7 @@ export function ReviewListPage() {
                   <td className="px-[16px] py-[8px]">
                     <button
                       onClick={handleClearFilters}
-                      className="text-[12px] text-[#b9000e] hover:underline whitespace-nowrap"
+                      className="text-[12px] text-[#b9000e] hover:underline whitespace-nowrap font-medium"
                     >
                       Xóa bỏ lọc
                     </button>
@@ -199,7 +225,12 @@ export function ReviewListPage() {
                       />
                     </td>
                     <td className="px-[16px] py-[12px] text-[14px] text-[#111827]">
-                      {review.code}
+                      {review.materialId}
+                    </td>
+                    <td className="px-[16px] py-[12px] text-[14px] text-[#111827]">
+                      <div className="line-clamp-2">
+                        {review.materialTitle}
+                      </div>
                     </td>
                     <td className="px-[16px] py-[12px] text-[14px] text-[#111827]">
                       {review.reviewer}
@@ -209,10 +240,8 @@ export function ReviewListPage() {
                         {review.reviewContent}
                       </div>
                     </td>
-                    <td className="px-[16px] py-[12px] text-[14px] text-[#111827]">
-                      <div className="line-clamp-1">
-                        {review.materialId}
-                      </div>
+                    <td className="px-[16px] py-[12px] text-[14px] text-[#111827] text-center">
+                      {new Date(review.createdDate).toLocaleDateString('vi-VN')}
                     </td>
                     <td className="px-[16px] py-[12px]">
                       <div className="flex justify-center">
